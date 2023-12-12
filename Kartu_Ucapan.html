@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #ffefef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: #333;
+        flex-direction: column;
+      }
+
+      #audio-container {
+        background: #ff69b4;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 350px;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      #card {
+        background: #ff69b4;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 400px;
+        text-align: center;
+        padding: 30px;
+        position: relative;
+        color: #fff;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      #scrollable-content {
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      #snowflakes-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .snowflake {
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        position: absolute;
+        border-radius: 50%;
+        transform-origin: 50% 50%;
+        animation: snowflakeAnimation 3s ease-out infinite;
+      }
+
+      @keyframes snowflakeAnimation {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate(0, 100vh) rotate(720deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="audio-container">
+      <audio id="myAudio" controls>
+        <source src="link_backsound.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div id="card">
+      <h1>Happy Birthday, [nama teman kamu]!</h1>
+      <p>🎉 Selamat ulang tahun yang ke-<span id="age"></span>! 🎂</p>
+      <div id="scrollable-content">
+        <p>
+          Dengan setiap tahun yang berlalu, dunia ini menjadi tempat yang lebih
+          indah karena keberadaanmu. Hari ini adalah tentangmu, tentang
+          kebahagiaan, tawa, dan momen-momen tak terlupakan yang telah kita
+          bagikan.
+        </p>
+        <p>
+          Semoga setiap saat hari ini membawa senyuman pada wajahmu dan hatimu
+          dipenuhi dengan kebahagiaan. Kamu adalah sumber keceriaan bagi banyak
+          orang, dan hari ini adalah waktunya untuk menerima cinta dan apresiasi
+          yang kamu pantas.
+        </p>
+        <p>
+          Terima kasih telah menjadi teman yang luar biasa. Mari rayakan hari
+          istimewa ini bersama-sama dan buat kenangan indah yang akan kita
+          simpan selamanya.
+        </p>
+        <p>Yang terbaik untukmu, Reihan Putra</p>
+        <!-- Tambahkan lebih banyak paragraf di sini jika perlu -->
+      </div>
+    </div>
+    <div id="snowflakes-container"></div>
+
+    <script>
+      document.getElementById("age").innerText = calculateAge("2003-12-12");
+
+      function calculateAge(birthday) {
+        const birthDate = new Date(birthday);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+
+        if (
+          monthDiff < 0 ||
+          (monthDiff === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+
+        return age;
+      }
+
+      function createSnowflakes() {
+        const container = document.getElementById("snowflakes-container");
+
+        for (let i = 0; i < 30; i++) {
+          const snowflake = document.createElement("div");
+          snowflake.className = "snowflake";
+          snowflake.style.left = `${Math.random() * 100}%`;
+          snowflake.style.animationDuration = `${Math.random() * 2 + 1}s`;
+          container.appendChild(snowflake);
+        }
+      }
+
+      createSnowflakes();
+    </script>
+  </body>
+</html>
